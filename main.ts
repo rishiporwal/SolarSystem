@@ -18,8 +18,8 @@ class SpaceObject extends sprites.BaseSprite {
     private py: Fx8;
     private cx = 80
     private cy = 60
-
-    constructor(name: string, map: Image, radius: number, speed: number) {
+    public name: string
+    constructor(parent:SpaceObject, name: string, map: Image, radius: number, speed: number) {
         super(1);
 
         let left = 80
@@ -36,6 +36,7 @@ class SpaceObject extends sprites.BaseSprite {
         this.vy = Fx8(0);
         this.speed = speed
         this.radius = radius
+        this.name = name
 
         this.left = Fx8(this.cx - 12 + (this.radius * Math.cos(this.angle * Math.PI / 180)));
         this.top = Fx8(this.cy - 4 + (this.radius * Math.sin(this.angle * Math.PI / 180)));
@@ -80,52 +81,54 @@ let DayCount = 0
 let textSprite = textsprite.create(DayCount + " Earth Days")
 textSprite.setMaxFontHeight(8)
 textSprite.setPosition(75, 10)
-
-let Sun = new SpaceObject ("Sun",img`
+let MilkyWay = new SpaceObject(null, "MilkyWay",img`
+    .
+`,0,0)
+let Sun = new SpaceObject (MilkyWay,"Sun",img`
     . 5 5 5 .
     5 5 5 5 5
     4 4 5 5 5
     5 5 5 4 4
     . 5 5 5 .
 `,0,0)
-let Mercury = new SpaceObject("Mercury", img`
+let Mercury = new SpaceObject(Sun, "Mercury", img`
     b
 `, 4, 4.74)
-let Venus = new SpaceObject("Venus", img`
+let Venus = new SpaceObject(Sun, "Venus", img`
     4 4
     4 4
 `, 6, 3.5)
-let Earth = new SpaceObject("Earth", img`
+let Earth = new SpaceObject(Sun, "Earth", img`
     . 9 .
     9 7 7
     . 7 .
 `, 10, 2.98)
-let Mars = new SpaceObject("Mars", img`
+let Mars = new SpaceObject(Sun, "Mars", img`
     . 2 .
     4 2 2
     . 2 .
 `, 13, 2.41)
-let Jupiter = new SpaceObject("Jupiter", img`
+let Jupiter = new SpaceObject(Sun, "Jupiter", img`
     . 4 4 5 .
     d 4 4 4 4
     2 2 4 d d
     5 4 4 4 4
     . 4 4 2 .
 `, 26, 1.31)
-let Saturn = new SpaceObject("Saturn", img`
+let Saturn = new SpaceObject(Sun, "Saturn", img`
     . . . 4 4 4 . . .
     . . 4 4 4 4 4 . .
     d d d d d d d d d
     . . 4 4 4 4 4 . .
     . . . 4 4 4 . . .
 `, 34, 0.97)
-let Uranus = new SpaceObject("Uranus", img`
+let Uranus = new SpaceObject(Sun, "Uranus", img`
     . 9 9 .
     8 8 9 9
     9 9 9 9
     . 9 8 .
 `, 49, 0.68)
-let Neptune = new SpaceObject("Neptune", img`
+let Neptune = new SpaceObject(Sun, "Neptune", img`
     . c c .
     a c c c
     c c c a
