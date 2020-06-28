@@ -3,7 +3,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 let WhiteStarL: Sprite = null
 let WhiteStar: Sprite = null
-class Planet extends sprites.BaseSprite {
+class SpaceObject extends sprites.BaseSprite {
     public map: Image;
     public left: Fx8;
     public top: Fx8;
@@ -107,52 +107,52 @@ Sun,
 100,
 true
 )
-let Mercury = new Planet("Mercury", img`
+let Mercury = new SpaceObject("Mercury", img`
     b
 `, 4, 4.74)
-let Venus = new Planet("Venus", img`
+let Venus = new SpaceObject("Venus", img`
     4 4
     4 4
 `, 6, 3.5)
-let Earth = new Planet("Earth", img`
+let Earth = new SpaceObject("Earth", img`
     . 9 .
     9 7 7
     . 7 .
 `, 10, 2.98)
-let Mars = new Planet("Mars", img`
+let Mars = new SpaceObject("Mars", img`
     . 2 .
     4 2 2
     . 2 .
 `, 13, 2.41)
-let Jupiter = new Planet("Jupiter", img`
+let Jupiter = new SpaceObject("Jupiter", img`
     . 4 4 5 .
     d 4 4 4 4
     2 2 4 d d
     5 4 4 4 4
     . 4 4 2 .
 `, 26, 1.31)
-let Saturn = new Planet("Saturn", img`
+let Saturn = new SpaceObject("Saturn", img`
     . . . 4 4 4 . . .
     . . 4 4 4 4 4 . .
     d d d d d d d d d
     . . 4 4 4 4 4 . .
     . . . 4 4 4 . . .
 `, 34, 0.97)
-let Uranus = new Planet("Uranus", img`
+let Uranus = new SpaceObject("Uranus", img`
     . 9 9 .
     8 8 9 9
     9 9 9 9
     . 9 8 .
 `, 49, 0.68)
-let Neptune = new Planet("Neptune", img`
+let Neptune = new SpaceObject("Neptune", img`
     . c c .
     a c c c
     c c c a
     . c a .
 `, 60, 0.54)
-let planets = [Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune]
+let Planets = [Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune]
 game.onUpdate(function () {
-    planets.forEach(function (value: Planet, index: number) {
+    Planets.forEach(function (value: SpaceObject, index: number) {
         value.Rotate()        
     })
 
