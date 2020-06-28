@@ -145,6 +145,7 @@ let Neptune = new Planet("Neptune", img`
     . c a .
 `, 60, 0.54)
 let planets = [Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune]
+let textSprite = textsprite.create("")
 game.onUpdate(function () {
     planets.forEach(function (value: Planet, index: number) {
         value.Rotate()        

@@ -2,7 +2,8 @@
     "name": "Untitled",
     "dependencies": {
         "device": "*",
-        "animation": "*"
+        "animation": "*",
+        "arcade-text": "github:darzu/arcade-text#v1.0.0"
     },
     "description": "",
     "files": [
