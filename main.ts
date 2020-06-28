@@ -1,3 +1,8 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+	
+})
+let Yellow_Star: Sprite = null
+let WhiteStar: Sprite = null
 class Planet extends sprites.BaseSprite {
     public map: Image;
     public left: Fx8;
@@ -70,73 +75,90 @@ class Planet extends sprites.BaseSprite {
         this.vy = Fx8(vy);
     }
 }
-
-let sun = sprites.create(img`
-    . 5 5 5 .
-    5 5 5 5 5
-    4 4 5 5 5
-    5 5 5 4 4
-    . 5 5 5 .
+let Sun = sprites.create(img`
+. 5 5 5 . 
+5 5 5 5 5 
+4 4 5 5 5 
+5 5 5 4 4 
+. 5 5 5 . 
 `, 0)
-sun.setPosition(68, 56)
+Sun.setPosition(68, 56)
 animation.runImageAnimation(
-    sun,
-    [img`
-        . 4 5 5 .
-        5 5 5 5 5
-        5 5 5 5 5
-        5 5 5 4 5
-        . 5 5 4 .
-    `,img`
-        . 4 5 5 .
-        5 4 5 5 5
-        5 5 5 5 5
-        5 5 5 5 5
-        . 5 5 4 .
-    `],
-    100,
-    true
+Sun,
+[img`
+. 4 5 5 . 
+5 5 5 5 5 
+5 5 5 5 5 
+5 5 5 4 5 
+. 5 5 4 . 
+`,img`
+. 4 5 5 . 
+5 4 5 5 5 
+5 5 5 5 5 
+5 5 5 5 5 
+. 5 5 4 . 
+`],
+100,
+true
 )
-
-let planets = [new Planet("Mercury", img`
+let Mercury = new Planet("Mercury", img`
     b
-`, 4, 4.74), new Planet("Venus", img`
+`, 4, 4.74)
+let Venus = new Planet("Venus", img`
     4 4
     4 4
-`, 6, 3.5), new Planet("Earth", img`
+`, 6, 3.5)
+let Earth = new Planet("Earth", img`
     . 9 .
     9 7 7
     . 7 .
-`, 10, 2.98), new Planet("Mars", img`
+`, 10, 2.98)
+let Mars = new Planet("Mars", img`
     . 2 .
     4 2 2
     . 2 .
-`, 13, 2.41), new Planet("Jupiter", img`
+`, 13, 2.41)
+let Jupiter = new Planet("Jupiter", img`
     . 4 4 5 .
     d 4 4 4 4
     2 2 4 d d
     5 4 4 4 4
     . 4 4 2 .
-`, 26, 1.31), new Planet("Saturn", img`
+`, 26, 1.31)
+let Saturn = new Planet("Saturn", img`
     . . . 4 4 4 . . .
     . . 4 4 4 4 4 . .
     d d d d d d d d d
     . . 4 4 4 4 4 . .
     . . . 4 4 4 . . .
-`, 34, 0.97), new Planet("Uranus", img`
+`, 34, 0.97)
+let Uranus = new Planet("Uranus", img`
     . 9 9 .
     8 8 9 9
     9 9 9 9
     . 9 8 .
-`, 49, 0.68), new Planet("Neptune", img`
+`, 49, 0.68)
+let Neptune = new Planet("Neptune", img`
     . c c .
     a c c c
     c c c a
     . c a .
-`, 60, 0.54),];
-
+`, 60, 0.54)
+let planets = [Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune]
 game.onUpdate(function () {
     planets.forEach(function (value: Planet, index: number) {
         value.Rotate()        
     })
+})
+game.onUpdateInterval(1000, function () {
+    WhiteStar = sprites.createProjectileFromSide(img`
+1 
+`, Math.randomRange(-1, -10), 0)
+    WhiteStar.setPosition(160, Math.randomRange(0, 120))
+    WhiteStar.setFlag(SpriteFlag.Ghost, true)
+    Yellow_Star = sprites.createProjectileFromSide(img`
+5 
+`, Math.randomRange(-1, -10), 0)
+    Yellow_Star.setPosition(160, Math.randomRange(0, 120))
+    Yellow_Star.setFlag(SpriteFlag.Ghost, true)
 })
