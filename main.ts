@@ -1,4 +1,3 @@
-let angle = 0
 class Planet extends sprites.BaseSprite {
     public map: Image;
     public left: Fx8;
@@ -8,8 +7,14 @@ class Planet extends sprites.BaseSprite {
     protected lastLeft: number;
     protected lastTop: number;
     private speed: number;
+    private radius: number;
+    private angle = 0
+    private px: Fx8;
+    private py: Fx8;
+    private cx = 80
+    private cy = 60
 
-    constructor(map: Image, radius: number, speed: number) {
+    constructor(name: string, map: Image, radius: number, speed: number) {
         super(1);
 
         let left = 80
@@ -25,6 +30,10 @@ class Planet extends sprites.BaseSprite {
         this.vx = Fx8(0);
         this.vy = Fx8(0);
         this.speed = speed
+        this.radius = radius
+
+        this.left = Fx8(this.cx - 12 + (this.radius * Math.cos(this.angle * Math.PI / 180)));
+        this.top = Fx8(this.cy - 4 + (this.radius * Math.sin(this.angle * Math.PI / 180)));
     }
 
     __drawCore(camera: scene.Camera) {
@@ -36,11 +45,11 @@ class Planet extends sprites.BaseSprite {
     }
 
     Rotate() {
-        angle += this.speed
-        px = Fx8(cx - 12 + (radius * Math.cos(angle * Math.PI / 180)));
-        py = Fx8(cy - 4 + (radius * Math.sin(angle * Math.PI / 180)));
+        this.angle += this.speed
+        this.px = Fx8(this.cx - 12 + (this.radius * Math.cos(this.angle * Math.PI / 180)));
+        this.py = Fx8(this.cy - 4 + (this.radius * Math.sin(this.angle * Math.PI / 180)));
         // Must call move and not modify left/top directly
-        this.move(Fx.sub(px, this.left), Fx.sub(py, this.top));
+        this.move(Fx.sub(this.px, this.left), Fx.sub(this.py, this.top));
     }
 
     move(dx: Fx8, dy: Fx8) {
@@ -61,47 +70,57 @@ class Planet extends sprites.BaseSprite {
         this.vy = Fx8(vy);
     }
 }
-const earth = new Planet(img`
-    . 9 9 7 .
-    9 9 9 7 7
-    9 7 9 9 7
-    9 9 9 9 9
-    . 9 9 9 .
-`, 0, 2);
-let px: Fx8;
-let py: Fx8;
-let radius = 50
-let cx = 80
-let cy = 60
-earth.left = Fx8(cx - 12 + (radius * Math.cos(angle * Math.PI / 180)));
-earth.top = Fx8(cy - 4 + (radius * Math.sin(angle * Math.PI / 180)));
-let mySprite = sprites.create(img`
+
+let sun = sprites.create(img`
     . 5 5 5 .
     5 5 5 5 5
     4 4 5 5 5
     5 5 5 4 4
     . 5 5 5 .
 `, 0)
-
-game.onUpdate(function(){
-    earth.Rotate()
-})
-
+sun.setPosition(70, 57)
 animation.runImageAnimation(
-    mySprite,
+    sun,
     [img`
-    . 4 5 5 .
-    5 5 5 5 5
-    5 5 5 5 5
-    5 5 5 4 5
-    . 5 5 4 .
-`, img`
-    . 4 5 5 .
-    5 4 5 5 5
-    5 5 5 5 5
-    5 5 5 5 5
-    . 5 5 4 .
-`],
+        . 4 5 5 .
+        5 5 5 5 5
+        5 5 5 5 5
+        5 5 5 4 5
+        . 5 5 4 .
+    `,img`
+        . 4 5 5 .
+        5 4 5 5 5
+        5 5 5 5 5
+        5 5 5 5 5
+        . 5 5 4 .
+    `],
     100,
     true
 )
+
+let planets = [new Planet("Earth", img`
+    . 9 9 7 .
+    9 9 9 7 7
+    9 7 9 9 7
+    9 9 9 9 9
+    . 9 9 9 .
+`, 30, 2.98), new Planet("Mercury", img`
+    . b b b .
+    d b b b b
+    b b b b b
+    b b b b d
+    . b b b .
+`, 10, 4.74), new Planet("Venus", img`
+    . 4 4 4 .
+    4 4 4 4 4
+    4 4 4 4 4
+    4 4 4 4 4
+    . 4 4 4 .
+`, 20, 3.5)];
+
+game.onUpdate(function () {
+    planets.forEach(function (value: Planet, index: number) {
+        value.Rotate()        
+    })
+})
+
