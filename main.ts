@@ -75,28 +75,34 @@ class Planet extends sprites.BaseSprite {
         this.vy = Fx8(vy);
     }
 }
+
+let DayCount = 0
+let textSprite = textsprite.create(DayCount + " Earth Days")
+textSprite.setMaxFontHeight(8)
+textSprite.setPosition(75, 10)
+
 let Sun = sprites.create(img`
-. 5 5 5 . 
-5 5 5 5 5 
-4 4 5 5 5 
-5 5 5 4 4 
-. 5 5 5 . 
+    . 5 5 5 .
+    5 5 5 5 5
+    4 4 5 5 5
+    5 5 5 4 4
+    . 5 5 5 .
 `, 0)
 Sun.setPosition(68, 56)
 animation.runImageAnimation(
 Sun,
 [img`
-. 4 5 5 . 
-5 5 5 5 5 
-5 5 5 5 5 
-5 5 5 4 5 
-. 5 5 4 . 
+    . 4 5 5 .
+    5 5 5 5 5
+    5 5 5 5 5
+    5 5 5 4 5
+    . 5 5 4 .
 `,img`
-. 4 5 5 . 
-5 4 5 5 5 
-5 5 5 5 5 
-5 5 5 5 5 
-. 5 5 4 . 
+    . 4 5 5 .
+    5 4 5 5 5
+    5 5 5 5 5
+    5 5 5 5 5
+    . 5 5 4 .
 `],
 100,
 true
@@ -149,18 +155,19 @@ game.onUpdate(function () {
     planets.forEach(function (value: Planet, index: number) {
         value.Rotate()        
     })
+
+    DayCount = DayCount + 3
+    textSprite.setText(DayCount + " Earth Days")
 })
 game.onUpdateInterval(1000, function () {
     WhiteStar = sprites.createProjectileFromSide(img`
-1 
-`, Math.randomRange(-1, -10), 0)
+        1
+    `, Math.randomRange(-1, -10), 0)
     WhiteStar.setPosition(160, Math.randomRange(0, 120))
     WhiteStar.setFlag(SpriteFlag.Ghost, true)
-})
-game.onUpdateInterval(1000, function () {
     WhiteStarL = sprites.createProjectileFromSide(img`
-1 
-`, Math.randomRange(1, 10), 0)
+        1
+    `, Math.randomRange(1, 10), 0)
     WhiteStarL.setPosition(0, Math.randomRange(0, 120))
     WhiteStarL.setFlag(SpriteFlag.Ghost, true)
 })
