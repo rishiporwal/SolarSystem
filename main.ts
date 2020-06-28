@@ -78,7 +78,7 @@ let sun = sprites.create(img`
     5 5 5 4 4
     . 5 5 5 .
 `, 0)
-sun.setPosition(70, 57)
+sun.setPosition(68, 56)
 animation.runImageAnimation(
     sun,
     [img`
@@ -98,29 +98,45 @@ animation.runImageAnimation(
     true
 )
 
-let planets = [new Planet("Earth", img`
-    . 9 9 7 .
-    9 9 9 7 7
-    9 7 9 9 7
-    9 9 9 9 9
-    . 9 9 9 .
-`, 30, 2.98), new Planet("Mercury", img`
-    . b b b .
-    d b b b b
-    b b b b b
-    b b b b d
-    . b b b .
-`, 10, 4.74), new Planet("Venus", img`
-    . 4 4 4 .
-    4 4 4 4 4
-    4 4 4 4 4
-    4 4 4 4 4
-    . 4 4 4 .
-`, 20, 3.5)];
+let planets = [new Planet("Mercury", img`
+    b
+`, 4, 4.74), new Planet("Venus", img`
+    4 4
+    4 4
+`, 6, 3.5), new Planet("Earth", img`
+    . 9 .
+    9 7 7
+    . 7 .
+`, 10, 2.98), new Planet("Mars", img`
+    . 2 .
+    4 2 2
+    . 2 .
+`, 13, 2.41), new Planet("Jupiter", img`
+    . 4 4 5 .
+    d 4 4 4 4
+    2 2 4 d d
+    5 4 4 4 4
+    . 4 4 2 .
+`, 26, 1.31), new Planet("Saturn", img`
+    . . . 4 4 4 . . .
+    . . 4 4 4 4 4 . .
+    d d d d d d d d d
+    . . 4 4 4 4 4 . .
+    . . . 4 4 4 . . .
+`, 34, 0.97), new Planet("Uranus", img`
+    . 9 9 .
+    8 8 9 9
+    9 9 9 9
+    . 9 8 .
+`, 49, 0.68), new Planet("Neptune", img`
+    . c c .
+    a c c c
+    c c c a
+    . c a .
+`, 60, 0.54),];
 
 game.onUpdate(function () {
     planets.forEach(function (value: Planet, index: number) {
         value.Rotate()        
     })
 })
-
