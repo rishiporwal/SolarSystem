@@ -81,32 +81,13 @@ let textSprite = textsprite.create(DayCount + " Earth Days")
 textSprite.setMaxFontHeight(8)
 textSprite.setPosition(75, 10)
 
-let Sun = sprites.create(img`
+let Sun = new SpaceObject ("Sun",img`
     . 5 5 5 .
     5 5 5 5 5
     4 4 5 5 5
     5 5 5 4 4
     . 5 5 5 .
-`, 0)
-Sun.setPosition(68, 56)
-animation.runImageAnimation(
-Sun,
-[img`
-    . 4 5 5 .
-    5 5 5 5 5
-    5 5 5 5 5
-    5 5 5 4 5
-    . 5 5 4 .
-`,img`
-    . 4 5 5 .
-    5 4 5 5 5
-    5 5 5 5 5
-    5 5 5 5 5
-    . 5 5 4 .
-`],
-100,
-true
-)
+`,0,0)
 let Mercury = new SpaceObject("Mercury", img`
     b
 `, 4, 4.74)
