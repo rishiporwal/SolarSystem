@@ -1,7 +1,7 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 	
 })
-let Yellow_Star: Sprite = null
+let WhiteStarL: Sprite = null
 let WhiteStar: Sprite = null
 class Planet extends sprites.BaseSprite {
     public map: Image;
@@ -145,7 +145,6 @@ let Neptune = new Planet("Neptune", img`
     . c a .
 `, 60, 0.54)
 let planets = [Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune]
-let textSprite = textsprite.create("")
 game.onUpdate(function () {
     planets.forEach(function (value: Planet, index: number) {
         value.Rotate()        
@@ -157,9 +156,11 @@ game.onUpdateInterval(1000, function () {
 `, Math.randomRange(-1, -10), 0)
     WhiteStar.setPosition(160, Math.randomRange(0, 120))
     WhiteStar.setFlag(SpriteFlag.Ghost, true)
-    Yellow_Star = sprites.createProjectileFromSide(img`
-5 
-`, Math.randomRange(-1, -10), 0)
-    Yellow_Star.setPosition(160, Math.randomRange(0, 120))
-    Yellow_Star.setFlag(SpriteFlag.Ghost, true)
+})
+game.onUpdateInterval(1000, function () {
+    WhiteStarL = sprites.createProjectileFromSide(img`
+1 
+`, Math.randomRange(1, 10), 0)
+    WhiteStarL.setPosition(0, Math.randomRange(0, 120))
+    WhiteStarL.setFlag(SpriteFlag.Ghost, true)
 })
